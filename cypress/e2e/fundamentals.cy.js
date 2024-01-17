@@ -18,6 +18,8 @@ describe('Fundamentals Tests', () => {
   it('Should contain correct header text', () => {
     cy.getDataTest('fundamentals-header').should('contain.text','Testing Fundamentals');
   })
+
+  //Within option
   it('Accordion Option Text Displays Upon Click and Hides When Deselected or Clicked Again', () => {
     cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
     cy.getDataTest('accordion-item-1').click()
@@ -26,6 +28,16 @@ describe('Fundamentals Tests', () => {
       cy.get('div[role="button"]').click()
       cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
     })
+  })
+
+  //find option
+  it.only('Accordion Option Text Displays Upon Click and Hides When Deselected or Clicked Again', () => {
+    cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
+    cy.getDataTest('accordion-item-1').click()
+    cy.contains(/Your tests will exist in a describe block./i).should('be.visible')
+    cy.getDataTest('accordion-item-1').find('div[role="button"]').click()
+    cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
+  
   })
 })
 
