@@ -3,15 +3,29 @@ TEST SUIT as it contains several test cases*/
 //First Argument = the Test Description "Title"
 //Second Argument = Callback funtion.
 //Inside the Argument of the First Function, I'll have my test
-describe('Fundamental Test', () => {
 /*The IT Block is one test*/
-  it('passes', () => {
 //First Argument = the Test Description "Title"
 //Second Argument = Callback funtion.
 //Inside the Argument of the First Function, I'll have my test
-    cy.visit('http://localhost:3000/fundamentals')
 //Cy is Cypress object that contains several methods to perform any needed action.
-    cy.get().contains()
+describe('Fundamentals Tests', () => {
+  beforeEach(()=>{
+    cy.visit('/fundamentals')
+  })
+  it('Contains correct header text', () => {  
+    cy.getDataTest('fundamentals-header').contains(/Testing Fundamentals/i); 
+  })
+  it('Should contain correct header text', () => {
+    cy.getDataTest('fundamentals-header').should('contain.text','Testing Fundamentals');
+  })
+  it('Accordion Option Text Displays Upon Click and Hides When Deselected or Clicked Again', () => {
+    cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
+    cy.getDataTest('accordion-item-1').click()
+    cy.contains(/Your tests will exist in a describe block./i).should('be.visible')
+    cy.getDataTest('accordion-item-1').within(()=>{
+      cy.get('div[role="button"]').click()
+      cy.contains(/Your tests will exist in a describe block./i).should('not.be.visible')
+    })
   })
 })
 
