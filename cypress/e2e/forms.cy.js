@@ -2,7 +2,7 @@ describe ('Testing Forms',()=>{
     beforeEach(()=>{
         cy.visit('/forms')
     })
-    it('Get Forms',()=>{
+    it('Testing Subscribe option',()=>{
         //Happy Path
         cy.contains(/Testing Forms/i)
         cy.getDataTest('subscribe-form').find('input').as('subscribe-input')
